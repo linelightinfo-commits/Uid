@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🔥 Facebook Group UID Extractor 🔥</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            min-height: 100vh;
+            text-align: center;
+            padding: 50px 20px;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 30px;
+            color: #00ffe7;
+            text-shadow: 0 0 10px #00ffe7;
+        }
+
+        form {
+            margin-bottom: 40px;
+        }
+
+        input[type="text"] {
+            width: 60%;
+            padding: 15px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            box-shadow: 0 0 10px #00ffe7;
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+        }
+
+        button {
+            padding: 15px 30px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 0 15px #ff4b2b;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background: linear-gradient(to right, #ff4b2b, #ff416c);
+        }
+
+        table {
+            width: 90%;
+            margin: 0 auto;
+            margin-top: 30px;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px #00ffe7;
+        }
+
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            background-color: rgba(0, 255, 231, 0.2);
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .error {
+            color: #ff4b2b;
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .icon {
+            margin-right: 10px;
+        }
+
+        .footer {
+            margin-top: 50px;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <h1><i class="fab fa-facebook icon"></i> Past Token</h1>
+    <form method="post">
+        <input type="text" name="token" placeholder=" EAAD......" required>
+        <br><br>
+        <button type="submit"><i class="fas fa-search"></i> Get Group List</button>
+    </form>
+
+    {% if error %}
+        <div class="error"> {{ error }}</div>
+    {% endif %}
+
+    {% if groups %}
+    <table>
+        <thead>
+            <tr>
+                <th><i class="fas fa-users"></i> Name </th>
+                <th><i class="fas fa-id-card"></i>  UID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for g in groups %}
+            <tr>
+                <td>{{ g.name }}</td>
+                <td>{{ g.id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    <div class="footer">
+        Powered by <b>Faiizu</b>
+    </div>
+</body>
+</html>
