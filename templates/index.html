@@ -2,140 +2,84 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>🔥 Facebook Group UID Extractor 🔥</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Facebook Groups Viewer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
             font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: #fff;
-            min-height: 100vh;
+            color: white;
             text-align: center;
-            padding: 50px 20px;
-            overflow-x: hidden;
+            padding: 30px;
         }
-
         h1 {
-            font-size: 40px;
-            margin-bottom: 30px;
-            color: #00ffe7;
-            text-shadow: 0 0 10px #00ffe7;
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px #000;
         }
-
-        form {
-            margin-bottom: 40px;
-        }
-
         input[type="text"] {
-            width: 60%;
-            padding: 15px;
-            font-size: 16px;
-            border-radius: 10px;
+            padding: 12px;
+            width: 80%;
+            max-width: 500px;
             border: none;
-            outline: none;
-            box-shadow: 0 0 10px #00ffe7;
-            background: rgba(0,0,0,0.3);
-            color: #fff;
+            border-radius: 12px;
+            font-size: 16px;
+            margin-bottom: 20px;
         }
-
         button {
-            padding: 15px 30px;
-            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            padding: 12px 24px;
+            font-size: 16px;
+            background: #00000088;
             color: white;
             border: none;
             border-radius: 10px;
-            font-size: 16px;
             cursor: pointer;
-            box-shadow: 0 0 15px #ff4b2b;
             transition: 0.3s;
         }
-
         button:hover {
-            transform: scale(1.1);
-            background: linear-gradient(to right, #ff4b2b, #ff416c);
+            background: #ffffff22;
         }
-
-        table {
-            width: 90%;
-            margin: 0 auto;
-            margin-top: 30px;
-            border-collapse: collapse;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 0 10px #00ffe7;
-        }
-
-        th, td {
+        .group-card {
+            background: rgba(255, 255, 255, 0.08);
+            margin: 15px auto;
             padding: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 600px;
+            text-align: left;
         }
-
-        th {
-            background-color: rgba(0, 255, 231, 0.2);
+        .group-card i {
+            margin-right: 8px;
         }
-
-        tr:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
         .error {
-            color: #ff4b2b;
-            font-weight: bold;
-            margin-top: 20px;
-            font-size: 18px;
-        }
-
-        .icon {
-            margin-right: 10px;
-        }
-
-        .footer {
-            margin-top: 50px;
-            font-size: 14px;
-            opacity: 0.7;
+            color: yellow;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <h1><i class="fab fa-facebook icon"></i> Past Token</h1>
-    <form method="post">
-        <input type="text" name="token" placeholder=" EAAD......" required>
-        <br><br>
-        <button type="submit"><i class="fas fa-search"></i> Get Group List</button>
+    <h1><i class="fab fa-facebook"></i> 
+        Enter Token</h1>
+
+    <form method="POST">
+        <input type="text" name="token" placeholder="Enter Facebook Access Token" value="{{ token }}" required>
+        <br>
+        <button type="submit"><i class="fas fa-database"></i> Fetct Data</button>
     </form>
 
     {% if error %}
-        <div class="error"> {{ error }}</div>
+        <div class="error"><i class="fas fa-triangle-exclamation"></i> {{ error }}</div>
     {% endif %}
 
     {% if groups %}
-    <table>
-        <thead>
-            <tr>
-                <th><i class="fas fa-users"></i> Name </th>
-                <th><i class="fas fa-id-card"></i>  UID</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for g in groups %}
-            <tr>
-                <td>{{ g.name }}</td>
-                <td>{{ g.id }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        <h2>Messenger Groups</h2>
+        {% for g in groups %}
+            <div class="group-card">
+                <p><strong><i class="fas fa-users"></i> Group Name:</strong> {{ g.name }}</p>
+                <p><strong><i class="fas fa-id-badge"></i> Group UID:</strong> {{ g.uid }}</p>
+            </div>
+        {% endfor %}
     {% endif %}
-
-    <div class="footer">
-        Powered by <b>Faiizu</b>
-    </div>
 </body>
 </html>
